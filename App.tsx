@@ -1,32 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import screws from './assets/screws.webp';
-import Stock from './components/Stock.tsx';
+import Home from "./components/Home";
+import Pick from "./components/Pick";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import { Base } from './styles';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useState, useEffect } from 'react';
 
-// ec1fc827a98f58f27bc93c7318bcda16
+
+const Tab = createBottomTabNavigator();
+const routeIcons = {
+  "Home": "home",
+  "Plock": "list",
+};
 
 export default function App() {
+  const [products, setProducts] = useState([]);
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.base}>
-        <Text style={{ color: '#33c', fontSize: 42 }}>Skruv Lagret</Text>
-        <Image source={screws} style={{ width: 320, height: 240 }} />
-        <Stock />
+    <SafeAreaProvider>
+      <SafeAreaView style={Base.container}>
+        <NavigationContainer>
+          <Tab.Navigator screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName = routeIcons[route.name] || "alert";
+
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: 'blue',
+            tabBarInactiveTintColor: 'gray',
+          })}
+          >
+            <Tab.Screen name="Home">
+              {() => <Home products={products} setProducts={setProducts} />}
+            </Tab.Screen>
+            <Tab.Screen name="Plock">
+              {() => <Pick products={products} setProducts={setProducts} />}
+            </Tab.Screen>
+          </Tab.Navigator>
+        </NavigationContainer>
         <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  base: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingLeft: 12,
-    paddingRight: 12,
-  }
-});
