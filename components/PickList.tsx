@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 
 
 export default function PickList({ route, navigation, setProducts }) {
-    console.log('setProducts', setProducts);
     const order:Order  = route.params.order;
     const [productsList, setProductsList] = useState([]);
 

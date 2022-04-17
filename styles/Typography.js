@@ -24,3 +24,10 @@ export const normal = {
     marginBottom: 28,
 };
 
+
+export const label = {
+    fontWeight: 'bold',
+    margin: 2
+
+};
+
