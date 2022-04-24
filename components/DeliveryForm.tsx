@@ -88,7 +88,6 @@ export default function DeliveryForm({ navigation, setProducts }) {
         const product = await getProduct(delivery.product_id);
         const updatedStock = product.stock + delivery.amount;
         await updateProductStock(product.id, product.name, updatedStock);
-        await console.log(delivery.amount);
         const products = await getProducts();
         setProducts(products);
         navigation.navigate("List", { reload: true });

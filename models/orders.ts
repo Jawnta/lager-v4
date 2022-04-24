@@ -20,4 +20,20 @@ const orders = {
     
 };
 
+export const getPackedAndSentOrders = async (): Promise<Order[]> => {
+    const allOrders = await orders.getOrders();
+    const result = allOrders.filter(order => order.status_id === 200 || order.status_id === 400)
+    return result;
+}
+
+export const billOrder = async (orderId: number, name: string) => {
+    const requestOptions:RequestInit = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: orderId, name, status_id: 600, api_key: config.api_key })
+    };
+    await fetch(`${config.base_url}/orders`, requestOptions);
+    return true;
+};
+
 export default orders;
