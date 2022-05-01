@@ -16,6 +16,15 @@ const orders = {
         };
         await fetch(`${config.base_url}/orders`, requestOptions);
         return true;
+    },
+    sendOrder: async function sendOrder(orderId: number, name: string) {
+        const requestOptions:RequestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: orderId, name, status_id: 400, api_key: config.api_key })
+        };
+        await fetch(`${config.base_url}/orders`, requestOptions);
+        return true;
     }
     
 };

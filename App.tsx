@@ -12,6 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useState, useEffect } from 'react';
 import { loggedIn } from "./models/auth";
 import Auth from './components/auth/Auth';
+import Ship from './components/ship/Ship';
 
 
 const Tab = createBottomTabNavigator();
@@ -56,6 +57,9 @@ export default function App() {
             </Tab.Screen>
             <Tab.Screen name="Inleveranser">
               {() => <Deliveries deliveries={deliveries} setDeliveries={setDeliveries} products={products} setProducts={setProducts} />}
+            </Tab.Screen>
+            <Tab.Screen name="Skicka order">
+              {() => <Ship products={products} setProducts={setProducts} />}
             </Tab.Screen>
             {isLoggedIn ?
             <Tab.Screen name="Faktura">
