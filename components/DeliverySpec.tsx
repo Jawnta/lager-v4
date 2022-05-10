@@ -21,9 +21,6 @@ export default function DeliverySpec({ route, navigation, setDeliveries }) {
             <Text>{data.deliveryDate}</Text>
             <Text>Kommentar</Text>
             <Text>{data.deliveryComment}</Text>
-
-            
-
         </View>
     )
 };

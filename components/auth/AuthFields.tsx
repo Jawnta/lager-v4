@@ -17,6 +17,7 @@ export default function AuthFields ({ auth, setAuth, title, submit, navigation})
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
+            testID="emailField"
         />
 
         <Text>Lösenord</Text>
@@ -27,6 +28,7 @@ export default function AuthFields ({ auth, setAuth, title, submit, navigation})
             secureTextEntry={true}
             autoCapitalize="none"
             autoCorrect={false}
+            testID="passwordField"
         />
 
         <Button 
@@ -34,6 +36,7 @@ export default function AuthFields ({ auth, setAuth, title, submit, navigation})
             onPress={() => {
                 submit();
             }}
+            testID="loginButton"
         />
 
         {title == "Logga in" &&

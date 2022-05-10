@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import { getProducts, updateProductStock, getProduct } from "../models/products";
 import { postDelivery } from "../models/delivery";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { showMessage } from 'react-native-flash-message';
 
 function ProductDropDown(props) {
     const [products, setProducts] = useState<Product[]>([]);
@@ -102,6 +103,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
                 delivery={delivery}
                 setDelivery={setDelivery}
                 setCurrentProduct={setCurrentProduct}
+                testID="productDropdown"
             />
 
             <Text style={{ ...Typography.label }}>Antal</Text>
@@ -112,11 +114,13 @@ export default function DeliveryForm({ navigation, setProducts }) {
                 }}
                 value={delivery?.amount?.toString()}
                 keyboardType="numeric"
+                testID="amountField"
             />
             <Text style={{ ...Typography.label }}>Leverans datum</Text>
             <DateDropDown
                 delivery={delivery}
                 setDelivery={setDelivery}
+                testID="dateDropdown"
             />
             <Text style={{ ...Typography.label }}>Kommentar</Text>
             <TextInput
@@ -125,12 +129,22 @@ export default function DeliveryForm({ navigation, setProducts }) {
                     setDelivery({ ...delivery, comment: content })
                 }}
                 value={delivery?.comment}
+                testID="commentField"
             />
 
             <Button
                 title="Gör inleverans"
+                testID="deliveryButton"
                 onPress={() => {
+                    if (!delivery.amount || !delivery.comment || !delivery.delivery_date) {
+                        showMessage({
+                            message: "Du måste fylla i alla fält",
+                            description: "Ett eller flera fält är inte ifyllda.",
+                            type: "info"
+                        })
+                    }else {
                     addDelivery(delivery);
+                }
                 }}
             />
         </ScrollView>

@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { loggedIn } from "./models/auth";
 import Auth from './components/auth/Auth';
 import Ship from './components/ship/Ship';
+import FlashMessage from "react-native-flash-message";
 
 
 const Tab = createBottomTabNavigator();
@@ -72,6 +73,7 @@ export default function App() {
           </Tab.Navigator>
         </NavigationContainer>
         <StatusBar style="auto" />
+        <FlashMessage position="top" />
       </SafeAreaView>
     </SafeAreaProvider>
   );

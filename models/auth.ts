@@ -45,8 +45,22 @@ export const login = async (email:string, password: string) => {
         }
     });
     const result = await response.json();
+
+    if (Object.prototype.hasOwnProperty.call(result, "errors")) {
+        return {
+            message: result.errors.title,
+            description: result.errors.detail,
+            type: "danger"
+        }
+    };
+    
     await storeToken(result.data.token);
-    return result.data.message;
+    
+    return {
+        message: "Success",
+        description: result.data.message,
+        type: "success"
+    };
 
 };
 
