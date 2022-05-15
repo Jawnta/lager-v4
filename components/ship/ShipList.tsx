@@ -32,6 +32,7 @@ export default function ShipList({ route, navigation }) {
         .map((order, index) => {
             return <Button
                 title={order.name}
+                testID={order.name}
                 key={index}
                 onPress={() => {
                     navigation.navigate('Details', {

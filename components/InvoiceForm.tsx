@@ -104,11 +104,16 @@ export default function InvoiceForm({ navigation, setProducts }) {
             <Text style={{ ...Typography.header2 }}>Ny faktura</Text>
 
             <Text style={{ ...Typography.label }}>Namn</Text>
-            <ProductDropDown/>
+            <ProductDropDown
+                testID="productDropdown"
+            />
               <Text style={{ ...Typography.label }}>Faktura datum</Text>
-            <DateDropDown/>
+            <DateDropDown
+                testID="dateDropdown"
+            />
 
             <Button
+                testID="invoiceButton"
                 title="Skapa faktura"
                 onPress={() => {
                     addInvoice();
